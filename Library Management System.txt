@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+
+public class Library {
+    private ArrayList<Book> books;
+    private ArrayList<User> users;
+
+    public Library() {
+        books = new ArrayList<>();
+        users = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        System.out.println("Added book: " + book);
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+        System.out.println("Added user: " + user);
+    }
+
+    public void issueBook(String ISBN, String userId) {
+        Book bookToIssue = findBookByISBN(ISBN);
+        if (bookToIssue == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+        if (bookToIssue.isIssued()) {
+            System.out.println("Book already issued.");
+            return;
+        }
+
+        User user = findUserById(userId);
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
+
+        bookToIssue.issue();
